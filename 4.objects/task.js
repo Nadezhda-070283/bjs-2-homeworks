@@ -16,16 +16,20 @@ Student.prototype.setSubject = function(subjectName) {
 
 Student.prototype.addMarks = function(...marks) {
 	if (this.marks) {
-		for (mark of marks)
-			this.marks.push(mark);
-
+	this.marks.push(...marks);
 	}
 }
 
 Student.prototype.getAverage = function() {
-	if (this.marks === undefined || this.marks.length === 0) {
+	if (this.marks === undefined) {
 		return 0;
 	} else {
 		return this.marks.reduce((a, v) => a + v / this.marks.length, 0);
 	}
+}
+
+Student.prototype.exclude = function (reason) {
+	delete this.subject;
+	delete this.marks;
+	this.excluded=reason;
 }
